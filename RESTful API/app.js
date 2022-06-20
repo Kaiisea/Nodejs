@@ -13,7 +13,7 @@ const port = 8000;
 mongoose.connect(conn);
 const database = mongoose.connection;
 
-// Verificar la conexi贸n con la base de datos
+// Verificar la conexion con la base de datos
 database.on("error", (error) => {
   console.log(error);
 });

@@ -1,13 +1,46 @@
 const express = require("express");
+const { findById } = require("../Model/memberModel");
+const Model = require("../Model/memberModel");
 const router = express.Router();
 
 // GET all collections
 router.get("/", (req, res) => {
-  res.send("GETALL response");
+  Model.find()
+    .then((data) => {
+      res.status(200).json({
+        status: "succeeded",
+        data, // siempre que el nombre de la propiedad
+        // y la propiedad se llamen igual
+        // si no seria data: data,
+        error: null,
+      });
+    })
+    .catch((error) => {
+      res.status(404).json({
+        status: "not found",
+        data,
+        error: error.message,
+      });
+    });
 });
 // GET doc by id
 router.get("/:id", (req, res) => {
-  res.send(`Get doc by id: ${req.params.id}`);
+  Model.findById(req.params.id)
+    .exec()   //exec para garantizar el funcionamiento correcto de la promesa
+    .then((data) => {
+      res.status(200).json({
+        status: "succeeded",
+        data,
+        error: null,
+      });
+    })
+    .catch((error) => {
+      res.status(404).json({
+        status: "not found",
+        data,
+        error: error.message,
+      });
+    });
 });
 // POST document
 router.post("/", (req, res) => {
