@@ -20,7 +20,19 @@ const shopSchema = new mongoose.Schema({
     shipping: {
         required: true,
         type: Number,
-    }
+    },
+    category: {
+        required: true,
+        type: String,
+    },
+    photo: {
+        required: true,
+        type: String,
+    },
+    trending: {
+        required: true,
+        type: Boolean,
+    },
 },
 {
     versionKey:false,

@@ -64,6 +64,11 @@ router.post("/", (req, res) => {
         last_name: req.body.last_name,
         email: req.body.email,
         phone: req.body.phone,
+        twitch_account: req.body.twitch_account,
+        photo: req.body.photo,
+        birth_day: req.body.birth_day,
+        birth_month: req.body.birth_month,
+        birth_year: req.body.birth_year,
     });
     data.save().then((data) => {
         res.status(201).json({
@@ -83,18 +88,11 @@ router.post("/", (req, res) => {
 
 // Update document by id 
 router.patch("/:id", (req, res) => {
-    // res.send(`UPDATE by id Response: ${req.params.id}`);
     let id = req.params.id;
     let data = req.body;
     let options = {
         new: true,
     }
-    // const data = new Model({
-    //     first_name: req.body.first_name,
-    //     last_name: req.body.last_name,
-    //     email: req.body.email,
-    //     phone: req.body.phone,
-    // });
     Model.findByIdAndUpdate(id, data, options).then((data) => {
         res.status(200).json({
             status: 'succeeded',
@@ -112,7 +110,6 @@ router.patch("/:id", (req, res) => {
 
 // Delete document by id
 router.delete("/:id", (req, res) => {
-    // res.send(`DELETE by id Response: ${req.params.id}`);
     let id = req.params.id;
     Model.findByIdAndDelete(id).then((data) => {
         res.status(200).json({

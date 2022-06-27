@@ -45,6 +45,9 @@ router.post("/", (req, res) => {
         item_new_price: req.body.item_new_price,
         item_description: req.body.item_description,
         shipping: req.body.shipping,
+        category: req.body.category,
+        photo: req.body.photo,
+        trending: req.body.trending,
     });
     data.save().then((data) => {
         res.status(201).json({
@@ -86,7 +89,6 @@ router.patch("/:id", (req, res) => {
 
 // Delete document by id
 router.delete("/:id", (req, res) => {
-    // res.send(`DELETE by id Response: ${req.params.id}`);
     let id = req.params.id;
     Model.findByIdAndDelete(id).then((data) => {
         res.status(200).json({

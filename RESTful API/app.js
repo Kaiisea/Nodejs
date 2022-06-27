@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const members = require("./Controller/memberController");
 const login = require("./Controller/loginController");
+const shop = require("./Controller/shopController");
 
 // Access of the environment variables
 require("dotenv").config();
@@ -26,6 +27,7 @@ const app = express();
 app.use(express.json());
 app.use("/members", members);
 app.use("/login", login);
+app.use("/shop", shop);
 
 
 app.listen(port, ()=>{
