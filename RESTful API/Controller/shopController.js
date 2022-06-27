@@ -1,10 +1,10 @@
 const express = require('express');
-const Model = require("../Model/memberModel");
+const Model = require("../Model/shopModel");
 const router = express.Router();
 const {verifyToken} = require("../lib/utils");
 
-// Get all collections 
-router.get("/", verifyToken ,(req, res) => {
+// Get all items 
+router.get("/" ,(req, res) => {
     Model.find().then((data) => {
         res.status(200).json({
             status: 'succeeded',
@@ -20,26 +20,7 @@ router.get("/", verifyToken ,(req, res) => {
     })
 });
 
-// Example with Async/Await
-// router.get("/", async (req, res) => {
-//    try{
-//     const data = await Model.find();
-//     res.status(200).json({
-//         status: 'succeeded',
-//         data,
-//         error: null
-//     });
-
-//    }catch(error){
-//     res.status(404).json({
-//         status: 'failed',
-//         data,
-//         error: error.message
-//     })
-//    }
-// });
-
-// Get doc by id
+// Get item by id
 router.get("/:id", (req, res) => {
     Model.findById(req.params.id).exec().then((data) => {
         res.status(200).json({
@@ -56,14 +37,14 @@ router.get("/:id", (req, res) => {
     })
 });
 
-// Post document 
+// Post item 
 router.post("/", (req, res) => {
-    // res.send(`POST document`);
     const data = new Model({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        email: req.body.email,
-        phone: req.body.phone,
+        item_name: req.body.item_name,
+        item_standard_price: req.body.item_standard_price,
+        item_new_price: req.body.item_new_price,
+        item_description: req.body.item_description,
+        shipping: req.body.shipping,
     });
     data.save().then((data) => {
         res.status(201).json({
@@ -83,18 +64,11 @@ router.post("/", (req, res) => {
 
 // Update document by id 
 router.patch("/:id", (req, res) => {
-    // res.send(`UPDATE by id Response: ${req.params.id}`);
     let id = req.params.id;
     let data = req.body;
     let options = {
         new: true,
     }
-    // const data = new Model({
-    //     first_name: req.body.first_name,
-    //     last_name: req.body.last_name,
-    //     email: req.body.email,
-    //     phone: req.body.phone,
-    // });
     Model.findByIdAndUpdate(id, data, options).then((data) => {
         res.status(200).json({
             status: 'succeeded',

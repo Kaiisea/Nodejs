@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const memberSchema = new mongoose.Schema({
     first_name: {
         required: true,
@@ -11,12 +10,17 @@ const memberSchema = new mongoose.Schema({
     },
     email: {
         required: true,
+        unique: true,
         type: String,
     },
     phone: {
         required: true,
         type: String,
     }
-});
+},
+{
+    versionKey:false,
+}
+);
 
-module.exports = mongoose.model('member', memberSchema)
+module.exports = mongoose.model("member", memberSchema);

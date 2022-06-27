@@ -1,30 +1,34 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const { use } = require("./Controller/memberController");
+const express = require('express');
+const mongoose = require('mongoose');
 const members = require("./Controller/memberController");
-// Acceso a las variables de entorno para la configuracion del servidor
+const login = require("./Controller/loginController");
+
+// Access of the environment variables
 require("dotenv").config();
 
-// Cadena de conexion a la base de datos
+// Connection String to the database
 const conn = process.env.DATABASE_URL;
 const port = 8000;
 
-// Conexion a la base de datos
+// Connection to the database
 mongoose.connect(conn);
 const database = mongoose.connection;
 
-// Verificar la conexion con la base de datos
-database.on("error", (error) => {
-  console.log(error);
+// Checking the connection to the database
+database.on("error", (error)=>{
+    console.log(error);
 });
-database.once("connected", () => {
-  console.log("Successfully connected");
+database.once("connected", ()=>{
+    console.log("Succesfully connected");
 });
 
 const app = express();
 app.use(express.json());
 app.use("/members", members);
+app.use("/login", login);
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
+
+app.listen(port, ()=>{
+    console.log("server running at http://localhost:" + port);
 });
+
