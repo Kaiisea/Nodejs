@@ -8,7 +8,6 @@ const { generateToken, verifyRefreshToken } = require("../lib/utils");
 
 // User register
 router.post("/new", async (req, res) => {
-  // res.send(`POST document`);
   const data = new Model({
     email: req.body.email,
     password: await bcrypt.hash(req.body.password, 10),
@@ -32,7 +31,6 @@ router.post("/new", async (req, res) => {
     });
 });
 
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjowLCJpYXQiOjE2NTUxNDUwMzgsImV4cCI6MTY1NTE0NTkzOH0.mQtl2HnDUU8yVPRUyNKTk551pq9qt3tkg7pEB8yMX0g
 // User login
 router.post("/", (req, res) => {
   Model.find({ email: req.body.email })

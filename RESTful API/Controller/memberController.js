@@ -62,6 +62,7 @@ router.post("/", (req, res) => {
     const data = new Model({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
+        username: req.body.username,
         email: req.body.email,
         phone: req.body.phone,
         twitch_account: req.body.twitch_account,
