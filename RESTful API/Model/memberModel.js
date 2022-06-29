@@ -13,6 +13,10 @@ const memberSchema = new mongoose.Schema({
         unique: true,
         type: String,
     },
+    pronouns: {
+        required: true,
+        type: String,
+    },
     email: {
         required: true,
         unique: true,
